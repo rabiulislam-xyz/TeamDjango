@@ -1,0 +1,10 @@
+{{ current_user }} current user <br>
+{{ another_user }} another user <br>
+
+<hr>
+
+<h2>Messages</h2>
+
+{% for message in messages %}
+    {{ message.content }} -- {{ message.sender }} <br>
+{% endfor %}

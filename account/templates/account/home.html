@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Login | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h2>User Profile</h2>
+    {#    user profile section#}
+    {#    these fields from User model #}
+    username: {{ user.username }}<br/>
+    first_name: {{ user.first_name }}<br/>
+    last_name: {{ user.last_name }}<br/>
+    email: {{ user.email }}<br/>
+    <hr/>
+
+    {#    these fields from user's Profile model #}
+    website: {{ user.profile.website }}<br/>
+    location: {{ user.profile.location }}<br/>
+    photo url: {{ user.profile.photo }}
+    photo: <img src="{{ user.profile.photo }}" height="200" width="200">
+
+    <hr>
+    <a href="{% url 'account:update_profile' %}">edit profile info</a>
+
+    <hr>
+    <h2>My Messages</h2>
+    <ul>
+        {% for message in messages %}
+            <li>{{ message.content }}</li>
+        {% endfor %}
+    </ul>
+
+<br><hr>
+    <h2>subscribed groups</h2>
+    <ul>
+        {% for group in groups %}
+            <li>{{ group.name }} count= {{ group.members.count }}</li>
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}

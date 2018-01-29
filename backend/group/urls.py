@@ -3,7 +3,7 @@ from django.conf.urls import url
 from .views import group_messages, group_single_message_detail, group_single_message_create
 
 
-app_name = 'account' # namespace for this app
+app_name = 'group' # namespace for this app
 
 urlpatterns = [
     url(r'^(?P<group_slug>[\w-]+)/$', group_messages, name='group_messages'),

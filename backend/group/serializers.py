@@ -11,9 +11,10 @@ class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model =  Group
         fields = ('name',
+                  'slug',
                   'creator',
-                  'members_count',
-                  'created_at')
+                  'created_at',
+                  'members_count')
 
 class GroupMessageSerializer(serializers.ModelSerializer):
     class Meta:

@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import Http404, HttpResponse
 from django.shortcuts import render, get_object_or_404
@@ -11,23 +12,13 @@ from .forms import MessageCreateForm
 from .serializers import GroupMessageSerializer
 
 
-# def group_messages(request, group_slug):
-#     messages = GroupMessage.objects.filter(group__slug=group_slug)
-#     return render(request, 'group_messages.html', {'messages': messages})
-
 @api_view(['GET'])
+@login_required
 def group_messages(request, group_slug):
     messages = GroupMessage.objects.filter(group__slug=group_slug)
     serialized_messages = GroupMessageSerializer(messages, many=True)
     context = {'messages': serialized_messages.data}
     return Response(context)
-
-# def group_single_message_detail(request, group_slug, message_id):
-#     messages = GroupMessage.objects.filter(group__slug=group_slug)
-#     message = messages.filter(id=message_id).first()
-#     if not message:
-#         raise Http404
-#     return render(request, 'group_single_message_detail.html', {'message': message})
 
 @api_view(['GET'])
 def group_single_message_detail(request, group_slug, message_id):
